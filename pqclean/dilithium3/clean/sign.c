@@ -3,10 +3,15 @@
 #include "params.h"
 #include "poly.h"
 #include "polyvec.h"
-#include "randombytes.h"
 #include "sign.h"
 #include "symmetric.h"
 #include <stdint.h>
+
+#ifdef TKEY
+#include <tkey/lib.h>
+#else
+#include <string.h>
+#endif
 
 /*************************************************
 * Name:        PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair
@@ -20,7 +25,7 @@
 *
 * Returns 0 (success)
 **************************************************/
-int PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair(uint8_t *pk, uint8_t *sk) {
+int PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair(uint8_t *pk, uint8_t *sk, uint8_t *seed) {
     uint8_t seedbuf[2 * SEEDBYTES + CRHBYTES];
     uint8_t tr[TRBYTES];
     const uint8_t *rho, *rhoprime, *key;
@@ -29,7 +34,11 @@ int PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair(uint8_t *pk, uint8_t *sk) {
     polyveck s2, t1, t0;
 
     /* Get randomness for rho, rhoprime and key */
-    randombytes(seedbuf, SEEDBYTES);
+    //randombytes(seedbuf, SEEDBYTES);
+
+    // No, create it from the passed seed instead.
+    memcpy(seedbuf, seed, SEEDBYTES);
+
     shake256(seedbuf, 2 * SEEDBYTES + CRHBYTES, seedbuf, SEEDBYTES);
     rho = seedbuf;
     rhoprime = rho + SEEDBYTES;
