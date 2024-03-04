@@ -1,0 +1,30 @@
+# -*- makefile -*-
+LIBDIR ?= ../pqclean/dilithium3/clean/
+
+CC=clang
+
+P := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+TKEYLIBDIR ?= $(P)/../../tkey-libs
+
+INCLUDE = -I $(LIBDIR) -I $(TKEYLIBDIR)/include 
+
+LDFLAGS =-L $(LIBDIR) -ldilithium3_clean_host
+
+OBJS=main.o malloc.o ../pqclean/fips202.o hex.o static-keys.o
+
+CFLAGS = $(INCLUDE) -Wall -g -DHOST # -DSTATICKEYS
+
+pqsigner: ../pqclean/dilithium3/clean/libdilithium3_clean_host.a $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) -DHOST
+
+$(OBJS): *.h
+
+../pqclean/dilithium3/clean/libdilithium3_clean_host.a:
+	make -C ../pqclean/dilithium3/clean clean
+	rm -f ../pqclean/*.o
+	make -C ../pqclean/dilithium3/clean -f Makefile.host
+
+.PHONY: clean
+clean:
+	$(RM) pqsigner *.o
+	make -C ../pqclean/dilithium3/clean/ -f Makefile.host clean
