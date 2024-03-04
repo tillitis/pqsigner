@@ -1,12 +1,12 @@
 # pqsigner
 
-Simple PQ signer program using [PQClean
+Simple PQ signer and accompanying verification program using [PQClean
 library's](https://github.com/PQClean/PQClean) dilithium3.
 
-We copy the PQClean/common/fips202.[ch] files under pqclean/.
+`pqsigner` signs and verifies a hardcoded message and outputs the
+public key and the signature over the message.
 
-PQClean/crypto_sign/dilithium3/clean is inlined under
-pqclean/dilithium3/clean. 
+`pqverify` verifies the signature over the same message.
 
 If you want to build and use a static compiled-in key pair, compile
 with `-DSTATICKEYS`.
@@ -47,6 +47,36 @@ $ picocom -b 62500 /dev/ttyACM0
 ```
 
 And press any key.
+
+## Verifying independently
+
+Build `pqverify` on the host:
+
+```
+cd pqverify
+make
+```
+
+Copy the public key and the signature to their own files. On the host
+machine client run:
+
+`pqverify <signature-file> <public-key-file>`:
+
+```
+$ cd pqverify 
+$ ./pqverify testdata/sig testdata/pk 
+Reading signature file testdata/sig with 6586 bytes
+Reading public key file testdata/pk with 3904 bytes
+Verified!
+```
+
+## Other code
+
+We copy the `PQClean/common/fips202.[ch]` files under `pqclean`
+directory.
+
+The entire `PQClean/crypto_sign/dilithium3/clean` is inlined under
+`pqclean/dilithium3/clean`.
 
 ## Licenses and SPDX tags
 

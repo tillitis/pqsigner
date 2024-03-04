@@ -11,7 +11,8 @@ cd ..
 tag="SPDX-License-Identifier:"
 
 missingok_dirs=(
-    pqclean/
+    pqclean
+    pqverify/testdata
 )
 
 missingok_files=(
@@ -20,7 +21,9 @@ missingok_files=(
     Makefile
     README.md
     pqsigner/Makefile
-    pqsigner/Makefile.host    
+    pqsigner/Makefile.host
+    pqverify/Makefile
+    pqverify/README.md
 )
 
 is_missingok() {
