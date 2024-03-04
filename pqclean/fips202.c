@@ -8,8 +8,22 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <string.h>
 
+
+#ifdef HOST
+#include <stdlib.h>
+#include <string.h>
+#endif
+
+#ifdef TKEY
+#include <tkey/lib.h>
+#include <tkey/led.h>
+#include <tkey/qemu_debug.h>
+
+#include "stdlib.h"
+#endif
+
+#include "malloc.h"
 #include "fips202.h"
 
 #define NROUNDS 24
