@@ -84,7 +84,8 @@ int main(void)
 	size_t msglen = 22;
 	uint8_t buf[8 * 1024]; // Our malloc memory
 
-	malloc_buf = &buf;
+	malloc_buf.buf = &buf;
+	malloc_buf.size = 8 * 1024;
 
 	// Wait for terminal program to connect and a character to be
 	// typed

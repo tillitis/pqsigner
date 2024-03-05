@@ -4,9 +4,15 @@
 #ifndef MALLOC
 #define MALLOC
 
-// Always set this to a locally allocated buffer, typically on the
-// stack, before calling mymalloc().
-extern void *malloc_buf;
+struct malloc_buf {
+	void *buf;
+	size_t size;
+	int count;
+};
+
+// Always set this malloc.buf and .size to a locally allocated buffer,
+// typically on the stack, before calling mymalloc().
+extern struct malloc_buf malloc_buf;
 
 #define malloc mymalloc
 #define free myfree
