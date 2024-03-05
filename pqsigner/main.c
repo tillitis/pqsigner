@@ -4,7 +4,6 @@
 #include <api.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <tkey/led.h>
 
 #include "malloc.h"
 #include "static-keys.h"
@@ -18,6 +17,7 @@
 #endif
 
 #ifdef TKEY
+#include <tkey/led.h>
 #include <tkey/lib.h>
 #include <tkey/proto.h>
 #include <tkey/qemu_debug.h>
@@ -131,5 +131,5 @@ int main(void)
 
 	puts("Verified!\n");
 
-	ledexit(LED_GREEN);
+	ledexit(2);
 }

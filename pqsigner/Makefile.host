@@ -4,9 +4,8 @@ LIBDIR ?= ../pqclean/dilithium3/clean/
 CC=clang
 
 P := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-TKEYLIBDIR ?= $(P)/../../tkey-libs
 
-INCLUDE = -I $(LIBDIR) -I $(TKEYLIBDIR)/include 
+INCLUDE = -I $(LIBDIR)
 
 LDFLAGS =-L $(LIBDIR) -ldilithium3_clean_host
 
