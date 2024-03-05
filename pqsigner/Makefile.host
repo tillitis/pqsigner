@@ -21,7 +21,6 @@ $(OBJS): *.h
 ../pqclean/dilithium3/clean/libdilithium3_clean_host.a:
 	make -C ../pqclean/dilithium3/clean clean
 	rm -f ../pqclean/*.o
-	make -C ../pqclean/dilithium3/clean -f Makefile.host
 
 .PHONY: clean
 clean:

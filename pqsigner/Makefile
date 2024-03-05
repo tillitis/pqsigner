@@ -37,7 +37,6 @@ $(OBJS): $(TKEYLIBDIR)/include/tkey/tk1_mem.h *.h
 clean:
 	$(RM) pqsigner.bin pqsigner.elf *.o
 	$(RM) ../pqclean/*.o
-	make -C ../pqclean/dilithium3 clean
 
 # Uses ../.clang-format
 FMTFILES=*.[ch]
