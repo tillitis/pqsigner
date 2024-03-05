@@ -1,30 +1,38 @@
 # pqsigner
 
-Simple PQ signer and accompanying verification program using [PQClean
+Simple PQ signer proof of concept for the Tillitis TKey and
+accompanying verification program using [PQClean
 library's](https://github.com/PQClean/PQClean) dilithium3.
 
 `pqsigner` signs and verifies a hardcoded message and outputs the
-public key and the signature over the message.
+public key and the signature over the message. It can be run both on
+the Tillitis TKey and a host computer.
 
-`pqverify` verifies the signature over the same message.
+`pqverify` verifies the signature over the same message. It's meant to
+run on the host.
 
 If you want to build and use a static compiled-in key pair, compile
 with `-DSTATICKEYS`.
 
 ## Building for TKey
 
-`make`
+```
+cd pqsigner
+./build.sh
+```
 
 ## Building for host
 
-`make -f Makefile.host`
-
+```
+cd pqsigner
+make -f Makefile.host
+```
 ## Running
 
 ### Host
 
 ```
-$ pqsigner
+$ ./pqsigner
 ```
 
 Hit the return key.
